@@ -2,7 +2,7 @@
 # Build config
 # =============================================
 
-root:             _gh_pages
+root:             _site
 dest:             <%= site.root %>
 assets:           <%= site.dest %>/assets
 
@@ -63,7 +63,7 @@ license:
 
 # SEO/SEM
 ga:
-  id:             UA-35547601-2
+  id:             false
   domain:         false
   siteid:         false
   tags:           false

@@ -74,6 +74,53 @@ module.exports = function(grunt) {
       }
     },
 
+    /**
+    * gunt-contrib-watch
+    */
+    watch: {
+        assemble: {
+            files: ['templates/**/*.{md,hbs,json,yml}'],
+            tasks: [
+                'assemble:site'
+            ]
+        },
+        js: {
+            files: [
+                'Gruntfile.js',
+                'js/**/*.js',
+                '!js/main.js'
+            ],
+            tasks: [
+                'requirejs:single',
+            ],
+            options: {
+                livereload: true,
+            },
+        },
+        less: {
+            files: [
+                'theme/**/*.less'
+            ],
+            tasks: [
+                'less',
+            ],
+            options: {
+                livereload: true,
+            },
+        },
+        livereload: {
+            // Here we watch the files the sass task will compile to
+            // These files are sent to the live reload server after sass compiles to them
+            files: [
+                '_site/assets/site.css',
+                '_site/assets/bootstrap.css',
+            ],
+            options: {
+                livereload: true
+            }
+        },
+    },
+
     assemble: {
       options: {
         flatten: true,
@@ -111,6 +158,30 @@ module.exports = function(grunt) {
       }
     },
 
+    /**
+    * grunt-contrib-requirejs
+    */
+    requirejs: {
+        /* Official example build file: https://github.com/jrburke/r.js/blob/master/build/example.build.js */
+
+        /* Will build 1 single file */
+        single: {
+            options: {
+                baseUrl: 'js/src',
+                mainConfigFile: 'js/src/config.js',
+                paths: {
+                    jquery: 'lib/amd-globals/jquery'
+                },
+                name: '../lib/require/almond',
+                include: ['init'],
+                insertRequire: ['init'],
+                out: '_site/assets/js/main.js',
+                generateSourceMaps: false,
+                wrap: true,
+                optimize: 'none'
+            }
+        }
+    },
 
     copy: {
       vendor: {
@@ -129,6 +200,8 @@ module.exports = function(grunt) {
       },
       update: {
         files: [
+          {expand: true, cwd: '<%= site.theme %>/img', src: ['**/*.{jpg,png,gif}'], dest: '<%= site.assets %>/img/'},
+          {expand: true, cwd: '<%= bootstrap %>/less/mixins', src: ['*'], dest: '<%= site.theme %>/mixins/'},
           {expand: true, cwd: '<%= bootstrap %>/less', src: ['*', '!{var*,mix*,util*}'], dest: '<%= site.theme %>/bootstrap/'},
           {expand: true, cwd: '<%= bootstrap %>/less', src: ['{util*,mix*}.less'], dest: '<%= site.theme %>/utils'},
           {expand: true, cwd: '<%= bootstrap %>/less', src: ['variables.less'], dest: '<%= site.theme %>/'},
@@ -152,12 +225,18 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-frep');
   grunt.loadNpmTasks('grunt-sync-pkg');
   grunt.loadNpmTasks('grunt-verb');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Load local "Subgrunt" task to run Bootstrap's Gruntfile.
   grunt.loadTasks('tasks');
 
   // Tests task.
   grunt.registerTask('test', ['subgrunt:test']);
+
+  grunt.registerTask('live', [
+    'watch'
+  ]);
 
   grunt.registerTask('dev', ['clean', 'frep', 'assemble']);
 
@@ -168,6 +247,7 @@ module.exports = function(grunt) {
     'clean',
     'subgrunt:js',
     'subgrunt:css',
+    'requirejs',
     'copy',
     'frep',
     'assemble',
