@@ -7455,6 +7455,15 @@ body {
   color: #231F20;
   text-transform: uppercase;
 }
+@media (min-width: 768px) {
+  .navbar .navbar-collapse {
+    border-top: 0;
+    clear: none;
+  }
+  .navbar .nav {
+    float: right;
+  }
+}
 @media (min-width: 992px) {
   .navbar {
     background: transparent;

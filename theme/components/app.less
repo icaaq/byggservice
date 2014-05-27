@@ -76,6 +76,17 @@ body {
     color: #231F20;
     text-transform: uppercase;
 }
+@media (min-width: @screen-sm-min) {
+    .navbar {
+        .navbar-collapse {
+          border-top: 0;
+          clear: none;
+        }
+        .nav {
+          float: right;
+        }
+    }
+}
 @media (min-width: @screen-md-min) {
   .navbar {
     background: transparent;
