@@ -7415,41 +7415,38 @@ body {
   width: 100%;
   z-index: 100;
 }
-.affix {
+.navbar {
   background: rgba(255, 255, 255, 0.4);
   left: 0;
   right: 0;
+  position: fixed;
+}
+.navbar .navbar-toggle,
+.navbar .navbar-toggle:hover {
+  border: transparent;
+  background: #231F20;
+}
+.navbar .navbar-toggle:hover .icon-bar,
+.navbar .navbar-toggle:hover:hover .icon-bar {
+  background-color: #fff;
+}
+.navbar .navbar-collapse {
+  border-top: 0;
+  clear: both;
+}
+.navbar .nav {
+  float: none;
+  margin: 0;
+  text-align: center;
 }
 .navbar-brand {
+  background: transparent;
+  box-shadow: none;
+  padding: 7px 0;
   height: auto;
 }
 .navbar-brand img {
-  transition: all 0.3s;
-  width: 300px;
-}
-.affix .navbar-brand {
-  background: transparent;
-  box-shadow: none;
-  padding: 5px;
-}
-.affix .navbar-brand img {
   width: 150px;
-}
-.navbar .navbar-inner {
-  margin-top: 80px;
-}
-.navbar .affix .navbar-inner {
-  margin-top: 0;
-}
-.navbar .nav {
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 2px;
-  float: right;
-  margin: 35px 0 0 0;
-}
-.navbar .affix .nav {
-  background: transparent;
-  margin-top: 0;
 }
 .navbar-collapse {
   margin-right: -15px;
@@ -7458,12 +7455,24 @@ body {
   color: #231F20;
   text-transform: uppercase;
 }
-.pannello-affix.affix {
-  background-color: #363635;
-  box-shadow: none;
-  opacity: 1;
-  width: 100%;
-  z-index: 999;
+@media (min-width: 992px) {
+  .navbar {
+    background: transparent;
+    left: auto;
+    right: auto;
+  }
+  .navbar .navbar-inner {
+    margin-top: 80px;
+  }
+  .navbar .nav {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    float: right;
+    margin: 31px 0 0 0;
+  }
+  .navbar-brand img {
+    width: 300px;
+  }
 }
 .olala {
   padding: 60px 0;

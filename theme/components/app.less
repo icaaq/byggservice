@@ -31,45 +31,42 @@ body {
   width: 100%;
   z-index: 100;
 }
-.affix {
+.navbar {
   background: rgba(255,255,255,0.4);
   left: 0;
   right: 0;
+  position: fixed;
+
+  .navbar-toggle,
+  .navbar-toggle:hover {
+    border: transparent;
+    background: #231F20;
+
+    &:hover {
+      .icon-bar {
+        background-color: #fff;
+      }
+    }
+  }
+  .navbar-collapse {
+    border-top: 0;
+    clear: both;
+  }
+
+  .nav {
+    float: none;
+    margin: 0;
+    text-align: center;
+  }
 }
 .navbar-brand {
+  background: transparent;
+  box-shadow: none;
+  padding: 7px 0;
   height: auto;
 
   img {
-    transition: all 0.3s;
-    width: 300px;
-  }
-}
-.affix .navbar-brand {
-  background: transparent;
-  box-shadow: none;
-  padding: 5px;
-
-
-  img {
     width: 150px;
-  }
-}
-.navbar {
-  .navbar-inner {
-    margin-top: 80px;
-  }
-  .affix .navbar-inner {
-    margin-top: 0;
-  }
-  .nav {
-    background: rgba(255,255,255,0.4);
-    border-radius: 2px;
-    float: right;
-    margin: 35px 0 0 0;
-  }
-  .affix .nav {
-    background: transparent;
-    margin-top: 0;
   }
 }
 .navbar-collapse {
@@ -79,12 +76,29 @@ body {
     color: #231F20;
     text-transform: uppercase;
 }
-.pannello-affix.affix {
-    background-color: #363635;
-    box-shadow: none;
-    opacity: 1;
-    width: 100%;
-    z-index: 999;
+@media (min-width: @screen-md-min) {
+  .navbar {
+    background: transparent;
+    left: auto;
+    right: auto;
+  }
+  .navbar {
+    .navbar-inner {
+      margin-top: 80px;
+    }
+    .nav {
+      background: rgba(255,255,255,0.4);
+      border-radius: 2px;
+      float: right;
+      margin: 31px 0 0 0;
+    }
+  }
+  .navbar-brand {
+
+    img {
+      width: 300px;
+    }
+  }
 }
 .olala {
   padding: 60px 0;
